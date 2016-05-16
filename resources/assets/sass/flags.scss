@@ -1,0 +1,16 @@
+.flag-list {
+  width: 200px;
+  margin: auto;
+}
+
+.flag {
+  margin-top: 10px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+  .selected,
+  :hover {
+    opacity: 1;
+  }
+
