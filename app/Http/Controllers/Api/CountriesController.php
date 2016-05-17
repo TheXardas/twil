@@ -45,6 +45,13 @@ class CountriesController extends ApiController
             ->where('is_active', '=', true)
             ->first()
         ;
+        
+        if (!$country->phone) {
+            // since there is no phone for that country yet, we should go to phone provider and help ourselves with one.
+            // TODO do that
+        }
+        
+        
         return $country;
     }
 }
