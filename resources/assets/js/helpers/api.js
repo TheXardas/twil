@@ -1,5 +1,4 @@
-
-
+import fetch from "isomorphic-fetch"
 
 export function get(url) {
     return makeRequest('get', url)
