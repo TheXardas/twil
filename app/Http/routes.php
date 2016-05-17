@@ -3,6 +3,7 @@
 /**
  * Application point of entrance
  */
+
 Route::get('/', 'MainController@index');
 
 /**
@@ -11,3 +12,10 @@ Route::get('/', 'MainController@index');
 Route::resource('/api/country', 'Api\CountriesController',
     ['only' => ['index', 'show']]
 );
+
+/**
+ * External resource routes
+ * TODO make 'em post methods
+ */
+Route::get('processCallStart', 'Api\TwilioController@processCallStart');
+Route::get('processCallEnd', 'Api\TwilioController@processCallEnd');

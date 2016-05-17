@@ -25,6 +25,11 @@ class MainController extends Controller
         $this->countries = $countries;
     }
 
+    /**
+     * Web-Application main entrance.
+     * 
+     * @return mixed
+     */
     public function index()
     {
         $countries = $this->countries->active();

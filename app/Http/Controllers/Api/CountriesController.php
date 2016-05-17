@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CountriesController extends ApiController
 {
-    /** @var CountryRepository  */
+    /** @var CountryRepository */
     protected $countries;
 
     public function __construct(CountryRepository $countries)
@@ -32,26 +32,25 @@ class CountriesController extends ApiController
 
     public function show($countryCode)
     {
-        sleep(2);
         $country = $this->countries
             ->active()
             ->where('code', '=', $countryCode)
-            ->first()
-        ;
+            ->first();
         if (!$country) {
             return new \Illuminate\Http\Response("No country found", 404);
         }
+
+        // TODO we should have a lock before this query, so we wouldn't buy an excessive phone number 
         $country->phone = $country->phones()
             ->where('is_active', '=', true)
-            ->first()
-        ;
-        
+            ->first();
+
         if (!$country->phone) {
             // since there is no phone for that country yet, we should go to phone provider and help ourselves with one.
             // TODO do that
         }
-        
-        
+
+
         return $country;
     }
 }

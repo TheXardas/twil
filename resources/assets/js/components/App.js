@@ -34,6 +34,10 @@ var App = React.createClass({
     },
 
     fetchCountry(countryCode) {
+        if (this.state.loading) {
+            // TODO debounce fetchCountry.
+            return;
+        }
         this.toggleLoader(true);
         Api.get('/country/' + countryCode)
             .then((response) => {
