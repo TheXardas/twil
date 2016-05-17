@@ -51,6 +51,9 @@ class TwilioApiClient
         $params = [
             'PhoneNumber' => $phoneNumber,
             'VoiceUrl' => action('Api\TwilioController@processCallStart'),
+            'VoiceFallbackUrl' => action('Api\TwilioFallbackController@voiceFallback'),
+            'SmsUrl' => action('Api\TwilioController@processSmsStart'),
+            'SmsFallbackUrl' => action('Api\TwilioFallbackController@smsFallback'),
         ];
         if ($name) {
             $params['FriendlyName'] = $name;

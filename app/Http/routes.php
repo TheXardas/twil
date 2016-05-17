@@ -19,3 +19,5 @@ Route::resource('/api/country', 'Api\CountriesController',
  */
 Route::get('processCallStart', 'Api\TwilioController@processCallStart');
 Route::get('processCallEnd', 'Api\TwilioController@processCallEnd');
+Route::get('voiceFallback', 'Api\TwilioFallbackController@voiceFallback');
+Route::get('voiceFallback', 'Api\TwilioFallbackController@smsFallback');
