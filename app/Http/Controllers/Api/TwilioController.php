@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
-use League\Flysystem\Config;
+use Illuminate\Config\Repository as Config;
 
 class TwilioController extends Controller
 {
-
     /** @var string Local phone number for our company. Calls will be redirected here from all over the world */
     protected $localNumber;
 
@@ -49,6 +48,14 @@ class TwilioController extends Controller
             'action' => action('Api\TwilioController@processCallEnd', [], false),
         ]);
         return $this->ok($response);
+    }
+
+    /**
+     *
+     */
+    public function processSms()
+    {
+        // TODO implement
     }
 
     /**

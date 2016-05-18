@@ -16,4 +16,17 @@ class CountryRepository
     {
         return Country::where('is_active', true);
     }
+
+    /**
+     * @param $countryId
+     * @return mixed
+     */
+    public function getLocked($countryId)
+    {
+        return Country::where('id', '=', $countryId)
+            ->lockForUpdate()
+            ->first()
+            ->getModel()
+        ;
+    }
 }

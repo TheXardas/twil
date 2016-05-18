@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use League\Flysystem\Config;
+use Illuminate\Config\Repository as Config;
 
 /**
  * TODO implement hardcore logging and exception-handleling here.
@@ -19,6 +19,10 @@ class TwilioApiClient
      */
     public function __construct(Config $config)
     {
+        if (!$config->get('services.twilio.sid') || !$config->get('services.twilio.token')) {
+            throw new \Exception('No twilio sid or token is set!');
+        }
+
         $this->client = new \Services_Twilio(
             $config->get('services.twilio.sid'),
             $config->get('services.twilio.token')
@@ -43,23 +47,20 @@ class TwilioApiClient
      * @return \Services_Twilio_Rest_IncomingPhoneNumber
      * @throws \Exception
      */
-    public function buyPhoneNumber($phoneNumber, $name = '')
+    public function buyPhoneNumber($phoneNumber)
     {
         if (!$phoneNumber) {
             throw new \Exception('Phone number is required in ' . __METHOD__);
         }
         $params = [
             'PhoneNumber' => $phoneNumber,
-            'VoiceUrl' => action('Api\TwilioController@processCallStart'),
-            'VoiceFallbackUrl' => action('Api\TwilioFallbackController@voiceFallback'),
-            'SmsUrl' => action('Api\TwilioController@processSmsStart'),
-            'SmsFallbackUrl' => action('Api\TwilioFallbackController@smsFallback'),
+            'VoiceUrl' => 'http://demo.twilio.com/docs/voice.xml', //action('Api\TwilioController@processCallStart'),
+            //'VoiceFallbackUrl' => action('Api\TwilioFallbackController@voiceFallback'),
+            'SmsUrl' => 'http://demo.twilio.com/docs/sms.xml', //action('Api\TwilioController@processSms'),
+            //'SmsFallbackUrl' => action('Api\TwilioFallbackController@smsFallback'),
         ];
-        if ($name) {
-            $params['FriendlyName'] = $name;
-        }
 
-        return $this->client->incoming_phone_numbers->create($params);
+        return $this->client->account->incoming_phone_numbers->create($params);
     }
 
     /**
