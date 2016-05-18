@@ -18,7 +18,7 @@ class TwilioController extends Controller
 
     const CALL_LOG_ACTION = 'call';
     const SMS_LOG_ACTION = 'sms';
-    
+
     /** @var string Local phone number for our company. Calls will be redirected here from all over the world */
     protected $localNumber;
 
@@ -72,7 +72,7 @@ class TwilioController extends Controller
 
         // TODO log request-params
         // TODO authenticate, that it's twilio callin'
-        
+
         $response = new \Services_Twilio_Twiml();
         $response->dial($this->localNumber, [
             'action' => action('Api\TwilioController@processCallEnd', [], false),

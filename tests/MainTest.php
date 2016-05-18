@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class MainTest extends TestCase
 {
     use DatabaseMigrations;
+
     /**
      *
      * @return void

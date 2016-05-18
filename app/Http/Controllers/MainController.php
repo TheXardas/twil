@@ -27,7 +27,7 @@ class MainController extends Controller
 
     /**
      * Web-Application main entrance.
-     * 
+     *
      * @return mixed
      */
     public function index()
