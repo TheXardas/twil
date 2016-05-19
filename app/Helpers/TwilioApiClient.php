@@ -54,10 +54,11 @@ class TwilioApiClient
         }
         $params = [
             'PhoneNumber' => $phoneNumber,
-            'VoiceUrl' => 'http://demo.twilio.com/docs/voice.xml', //action('Api\TwilioController@processCallStart'),
-            //'VoiceFallbackUrl' => action('Api\TwilioFallbackController@voiceFallback'),
-            'SmsUrl' => 'http://demo.twilio.com/docs/sms.xml', //action('Api\TwilioController@processSms'),
-            //'SmsFallbackUrl' => action('Api\TwilioFallbackController@smsFallback'),
+            'VoiceUrl' => action('Api\TwilioController@processCallStart'),
+            'StatusCallback' => action('Api\TwilioController@processCallEnd'),
+            'VoiceFallbackUrl' => action('Api\TwilioFallbackController@voiceFallback'),
+            'SmsUrl' => action('Api\TwilioController@processSms'),
+            'SmsFallbackUrl' => action('Api\TwilioFallbackController@smsFallback'),
         ];
 
         return $this->client->account->incoming_phone_numbers->create($params);

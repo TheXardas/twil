@@ -14,7 +14,7 @@ class CountriesController extends ApiController
 {
     /** @var CountryRepository */
     protected $countries;
-    /** @var CountryHelper  */
+    /** @var CountryHelper */
     protected $countryHelper;
 
     public function __construct(CountryRepository $countries, CountryHelper $countryHelper)
@@ -42,8 +42,7 @@ class CountriesController extends ApiController
             ->active()
             ->where('code', '=', $countryCode)
             ->first()
-            ->getModel()
-        ;
+            ->getModel();
         if (!$country) {
             return new \Illuminate\Http\Response("No country found", 404);
         }

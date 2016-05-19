@@ -9,9 +9,9 @@ use App\Phone;
 
 class CountryHelper
 {
-    /** @var TwilioApiClient  */
+    /** @var TwilioApiClient */
     protected $twilioApiClient;
-    /** @var CountryRepository  */
+    /** @var CountryRepository */
     protected $countries;
 
     /**
