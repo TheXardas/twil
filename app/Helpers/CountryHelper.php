@@ -61,6 +61,13 @@ class CountryHelper
             // Accessing country with lock, so we won't buy a phone_number twice.
             $countryId = $country->id;
             $country = $this->countries->getLocked($countryId);
+            $country->phone = $country->phones()
+                ->where('is_active', '=', true)
+                ->first();
+            if ($country->phone) {
+                DB::commit();
+                return $country;
+            }
 
             // TODO make it environment-free
             //$availablePhones = $this->twilioApiClient->getAvailablePhoneNumbers($country->code);
